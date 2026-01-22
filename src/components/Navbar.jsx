@@ -1,6 +1,7 @@
 import React from "react";
 
 const Navbar = () => {
+  
   //
   return (
     <div className="navbar bg-base-100 shadow-sm bg-gradient-to-r from-pink-100 via-fuchsia-50 to-purple-100 text-white shadow-lg">

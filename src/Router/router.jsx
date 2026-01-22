@@ -3,6 +3,8 @@ import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home/Home";
 import Categories from "../components/Categories";
 import CategoryCard from "../components/CategoryCard";
+import Login from "../Auth/Login";
+import Register from "../Auth/Register";
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +23,15 @@ export const router = createBrowserRouter([
                 element : <CategoryCard></CategoryCard>,
                 loader : ({params})=>fetch(`http://localhost:3000/products/${params.category}`)
             },
+
+            {
+                path : '/login',
+                element : <Login></Login>
+            },
+            {
+                path : '/register',
+                element : <Register></Register>
+            }
             
             
         ]

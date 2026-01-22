@@ -1,13 +1,63 @@
-import React from "react";
+import React, { use } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { Link, NavLink } from "react-router";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  
+  const { user, signOutUser } = use(AuthContext);
+  console.log(user);
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then((data) => {
+        Swal.fire({
+          icon: "success",
+          title: "Signed Out",
+          text: "You have successfully logged out.",
+          confirmButtonColor: "#ec4899",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+        icon: "error",
+        title: "Logout Failed",
+        text: err,
+        confirmButtonColor: "#ec4899",
+      });
+      });
+  };
+
+  const links = (
+    <>
+      <li>
+        <NavLink to={"/"}>Home</NavLink>
+      </li>
+      <li>
+        <NavLink>Pets &amp; Supplies</NavLink>
+      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink>Add Listing</NavLink>
+          </li>
+          <li>
+            <NavLink>My Listings</NavLink>
+          </li>
+          <li>
+            <NavLink>My Orders</NavLink>
+          </li>
+        </>
+      )}
+    </>
+  );
+
   //
   return (
     <div className="navbar bg-base-100 shadow-sm bg-gradient-to-r from-pink-100 via-fuchsia-50 to-purple-100 text-white shadow-lg">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} role="button" className="btn btn-circle lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -28,7 +78,7 @@ const Navbar = () => {
             tabIndex="-1"
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-            {/* link */}
+            {links}
           </ul>
         </div>
         <a className="flex items-center md:text-2xl font-extrabold bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent space-x-2 cursor-pointer">
@@ -36,32 +86,50 @@ const Navbar = () => {
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {/* links */}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end gap-2">
-        <a
-          className="
+      <div className="navbar-end ">
+        {user ? (
+          <div className="flex gap-2">
+            <span className="">
+              <img
+                className="rounded-full h-12"
+                src={
+                  user.photoURL ||
+                  "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                }
+                alt=""
+              />
+            </span>
+            <button onClick={handleSignOut} className="btn btn-sm md:btn-lg">
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div className="flex gap-2">
+            <a
+              className="
      btn btn-sm md:btn-lg text-white border-0
     bg-gradient-to-r from-pink-400 via-fuchsia-500 to-purple-500
     hover:from-pink-500 hover:via-fuchsia-600 hover:to-purple-600
     transition-all duration-300
   "
-        >
-          Login
-        </a>
+            >
+              Login
+            </a>
 
-        <a
-          className="
+            <a
+              className="
     btn btn-sm md:btn-lg text-white border-0
     bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-500
     hover:from-emerald-500 hover:via-teal-500 hover:to-cyan-600
     transition-all duration-300
   "
-        >
-          Register
-        </a>
+            >
+              Register
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );

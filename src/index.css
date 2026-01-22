@@ -2,3 +2,23 @@
  @plugin "daisyui" {
   themes: light --default;
  }
+
+
+
+
+/* Active link underline */
+li a{
+  border-radius: 50px;  
+  color: #e76aab;           /* pink */
+  font-weight: bold;
+  
+}
+li a:hover{
+    text-decoration: underline;
+    font-weight: bolder;
+}
+
+
+
+
+

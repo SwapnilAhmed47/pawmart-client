@@ -21,9 +21,7 @@ export const router = createBrowserRouter([
                 element : <CategoryCard></CategoryCard>,
                 loader : ({params})=>fetch(`http://localhost:3000/products/${params.category}`)
             },
-            {
-                
-            }
+            
             
         ]
     }

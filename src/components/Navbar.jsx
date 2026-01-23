@@ -34,7 +34,7 @@ const Navbar = () => {
         <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <NavLink>Pets &amp; Supplies</NavLink>
+        <NavLink to={"/pets-supply"}>Pets &amp; Supplies</NavLink>
       </li>
       {user && (
         <>
@@ -83,7 +83,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[9999] mt-3 w-52 p-2 shadow"
           >
             {links}
           </ul>
@@ -108,7 +108,7 @@ const Navbar = () => {
                 alt=""
               />
             </span>
-            <button onClick={handleSignOut} className="btn btn-sm md:btn-lg btn btn-sm md:btn-lg
+            <button onClick={handleSignOut} className="btn btn-lg
     text-white font-semibold
     rounded-xl
     bg-gradient-to-r from-red-400 via-pink-500 to-purple-500
@@ -120,8 +120,8 @@ const Navbar = () => {
         ) : (
           <div className="flex gap-2">
             <a
-              className="
-     btn btn-sm md:btn-lg text-white border-0
+              className="rounded-xl
+     btn btn-lg text-white border-0
     bg-gradient-to-r from-pink-400 via-fuchsia-500 to-purple-500
     hover:from-pink-500 hover:via-fuchsia-600 hover:to-purple-600
     transition-all duration-300
@@ -131,8 +131,8 @@ const Navbar = () => {
             </a>
 
             <a
-              className="
-    btn btn-sm md:btn-lg text-white border-0
+              className="rounded-xl
+    btn btn-lg text-white border-0
     bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-500
     hover:from-emerald-500 hover:via-teal-500 hover:to-cyan-600
     transition-all duration-300

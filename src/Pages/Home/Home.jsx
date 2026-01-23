@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLoaderData } from "react-router";
 import ProductCard from "../../components/ProductCard";
 import Categories from "../../components/Categories";
@@ -7,8 +7,8 @@ import { FaListAlt } from "react-icons/fa";
 import { FaPaw } from "react-icons/fa";
 
 const Home = () => {
-  const products = useLoaderData();
-  console.log(products);
+  const data = useLoaderData();
+  const [products, setProducts] = useState(data)
 
   return (
     <div>

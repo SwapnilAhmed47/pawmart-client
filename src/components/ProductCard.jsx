@@ -30,53 +30,55 @@ const ProductCard = ({ product }) => {
   }
 
   return (
-    <div className="card bg-white shadow-md hover:shadow-xl transition rounded-2xl overflow-hidden">
-      {/* Image */}
-      <figure className="relative">
-        <img src={image} alt={name} className="h-56 w-full object-cover" />
+    <div>
+      <div className="card bg-white shadow-md hover:shadow-xl transition rounded-2xl overflow-hidden">
+        {/* Image */}
+        <figure className="relative">
+          <img src={image} alt={name} className="h-56 w-full object-cover" />
 
-        {/* Category badge */}
-        <span
-          className="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full
+          {/* Category badge */}
+          <span
+            className="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full
           bg-gradient-to-r from-orange-400 to-pink-500 text-white"
-        >
-          {category}
-        </span>
-      </figure>
+          >
+            {category}
+          </span>
+        </figure>
 
-      {/* Body */}
-      <div className="card-body p-5">
-        {/* Name */}
-        <h2 className="card-title text-lg font-bold flex items-center gap-2">
-          <FaPaw className="text-pink-500" />
-          {name}
-        </h2>
+        {/* Body */}
+        <div className="card-body p-5">
+          {/* Name */}
+          <h2 className="card-title text-lg font-bold flex items-center gap-2">
+            <FaPaw className="text-pink-500" />
+            {name}
+          </h2>
 
-        {/* Location */}
-        <p className="flex items-center gap-2 text-sm text-gray-500">
-          <FaMapMarkerAlt className="text-orange-500" />
-          {location}
-        </p>
+          {/* Location */}
+          <p className="flex items-center gap-2 text-sm text-gray-500">
+            <FaMapMarkerAlt className="text-orange-500" />
+            {location}
+          </p>
 
-        {/* Price */}
-        <p className="mt-2 font-semibold text-lg">
-          {price ? (
-            <span className="text-purple-600">${price}</span>
-          ) : (
-            <span className="text-green-600">Free for Adoption 🐶</span>
-          )}
-        </p>
+          {/* Price */}
+          <p className="mt-2 font-semibold text-lg">
+            {price ? (
+              <span className="text-purple-600">${price}</span>
+            ) : (
+              <span className="text-green-600">Free for Adoption 🐶</span>
+            )}
+          </p>
 
-        {/* Button */}
-        <div className="card-actions mt-4">
-          <Link
-            to={`/products/${_id}`}
-            className="w-full text-center py-2 rounded-xl text-white font-semibold
+          {/* Button */}
+          <div className="card-actions mt-4">
+            <Link
+              to={`/products/${_id}`}
+              className="w-full text-center py-2 rounded-xl text-white font-semibold
               bg-gradient-to-r from-orange-300 via-pink-500 to-purple-400
               hover:opacity-90 transition"
-          >
-            See Details
-          </Link>
+            >
+              See Details
+            </Link>
+          </div>
         </div>
       </div>
     </div>

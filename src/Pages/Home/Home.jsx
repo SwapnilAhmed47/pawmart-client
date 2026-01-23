@@ -5,6 +5,7 @@ import Categories from "../../components/Categories";
 import Banner from "../../components/Banner";
 import { FaListAlt } from "react-icons/fa";
 import { FaPaw } from "react-icons/fa";
+import WhyAdopt from "../../components/WhyAdopt";
 
 const Home = () => {
   const data = useLoaderData();
@@ -27,7 +28,7 @@ const Home = () => {
         </h3>
         <Categories></Categories>
       </div>
-      <div className="mt-15">
+      <div className="mt-10">
         <h3
           className="flex justify-center items-center gap-2 text-2xl md:text-3xl font-extrabold
   bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600
@@ -42,6 +43,10 @@ const Home = () => {
                 products.map(product => <ProductCard product={product}></ProductCard>)
             }
         </div>
+        <div className="mt-10">
+          <WhyAdopt></WhyAdopt>
+        </div>
+
       </div>
     </div>
   );

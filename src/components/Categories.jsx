@@ -6,20 +6,13 @@ const Categories = () => {
   const category = ["pets", "food", "accessories", "care"];
   const [products, setProducts] = useState();
   console.log(products);
-  const handelCategory = (c) => {
-    fetch(`http://localhost:3000/products/${c}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-      });
-  };
+  
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
       {category.map((cat, i) => (
         <Link
           key={i}
-          onClick={() => handelCategory(cat)}
           to={`/categories/${cat}`}
           className="
       text-center

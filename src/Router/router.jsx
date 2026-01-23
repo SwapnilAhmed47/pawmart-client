@@ -6,6 +6,7 @@ import CategoryCard from "../components/CategoryCard";
 import Login from "../Auth/Login";
 import Register from "../Auth/Register";
 import PetSupply from "../Pages/PetSupply/PetSupply";
+import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 
 export const router = createBrowserRouter([
     {
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
             {
                 path : '/categories/:category',
                 element : <CategoryCard></CategoryCard>,
-                loader : ({params})=>fetch(`http://localhost:3000/products/${params.category}`)
+                loader : ({params})=>fetch(`http://localhost:3000/categories/${params.category}`)
             },
             {
                 path : '/pets-supply',
@@ -30,6 +31,13 @@ export const router = createBrowserRouter([
                 loader : ()=>fetch('http://localhost:3000/products')
                 
 
+            },
+
+            {
+                path : '/products/:id',
+                element : <ProductDetails></ProductDetails>,
+                loader : ({params})=>fetch(`http://localhost:3000/products/${params.id}`)
+                
             },
 
             {

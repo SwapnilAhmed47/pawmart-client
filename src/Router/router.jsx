@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
             {
                 index : true,
                 element : <Home></Home>,
-                loader : ()=> fetch("http://localhost:3000/products")
+                loader : ()=> fetch("http://localhost:3000/latest-products")
             
             },
 
@@ -35,5 +35,9 @@ export const router = createBrowserRouter([
             
             
         ]
+    },
+    {
+        path : '*',
+        element : <p>Error</p>
     }
 ])

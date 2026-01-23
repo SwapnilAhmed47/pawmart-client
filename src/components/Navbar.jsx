@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const { user, signOutUser } = use(AuthContext);
+  const { user, loading, signOutUser } = use(AuthContext);
   console.log(user);
 
   const handleSignOut = () => {
@@ -51,6 +51,13 @@ const Navbar = () => {
       )}
     </>
   );
+
+  if(loading){
+
+    return <div className="flex justify-center item-center">
+      <div className="skeleton h-18 w-full"></div>
+    </div>
+  }
 
   //
   return (
@@ -101,7 +108,12 @@ const Navbar = () => {
                 alt=""
               />
             </span>
-            <button onClick={handleSignOut} className="btn btn-sm md:btn-lg">
+            <button onClick={handleSignOut} className="btn btn-sm md:btn-lg btn btn-sm md:btn-lg
+    text-white font-semibold
+    rounded-xl
+    bg-gradient-to-r from-red-400 via-pink-500 to-purple-500
+    hover:from-red-500 hover:via-pink-600 hover:to-purple-600
+    transition-all duration-300">
               Logout
             </button>
           </div>

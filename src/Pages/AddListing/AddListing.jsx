@@ -1,9 +1,9 @@
-import React, { use } from "react";
+import React, {  useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 
 const AddListing = () => {
-  const { user, loading } = use(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   console.log(user);
   const handleAddListing = (e) => {
     e.preventDefault();

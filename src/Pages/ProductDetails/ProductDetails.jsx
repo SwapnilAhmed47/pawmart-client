@@ -1,13 +1,13 @@
-import React, { use, useRef } from "react";
-import { useLoaderData, useParams } from "react-router";
+import React, { use, useContext, useRef } from "react";
+import { useLoaderData } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 
 const ProductDetails = () => {
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
+  console.log(user.email)
   const product = useLoaderData();
-  const {id} = useParams()
-  console.log(id)
-  const { name, category, ownerEmail, description, price, location, image } =
+  console.log(product)
+  const {_id, name, category, email,  description, price, location, image } =
     product;
 
   const modelRef = useRef(null);
@@ -36,7 +36,7 @@ const ProductDetails = () => {
             <strong>Category:</strong> {category}
           </p>
           <p className="text-gray-600">
-            <strong>Owner's Email:</strong> {user.email}
+            <strong>Owner's Email:</strong> {email}
           </p>
           <p className="text-gray-600">
             <strong>Location:</strong> {location}
@@ -74,7 +74,7 @@ const ProductDetails = () => {
                       type="text"
                       name="buyerName"
                       readOnly
-                      placeholder="Auto from logged-in user"
+                      defaultValue={user?.displayName}
                       className="w-full px-4 py-2 border rounded-xl bg-gray-100 cursor-not-allowed"
                     />
                   </div>
@@ -88,7 +88,7 @@ const ProductDetails = () => {
                       type="email"
                       name="email"
                       readOnly
-                      placeholder="Auto from logged-in user"
+                      defaultValue={user?.email}
                       className="w-full px-4 py-2 border rounded-xl bg-gray-100 cursor-not-allowed"
                     />
                   </div>
@@ -102,7 +102,7 @@ const ProductDetails = () => {
                       type="text"
                       name="productId"
                       readOnly
-                      placeholder="Auto filled"
+                      defaultValue={_id}
                       className="w-full px-4 py-2 border rounded-xl bg-gray-100 cursor-not-allowed"
                     />
                   </div>
@@ -116,7 +116,7 @@ const ProductDetails = () => {
                       type="text"
                       name="productName"
                       readOnly
-                      placeholder="Auto filled"
+                      defaultValue={name}
                       className="w-full px-4 py-2 border rounded-xl bg-gray-100 cursor-not-allowed"
                     />
                   </div>
@@ -130,7 +130,8 @@ const ProductDetails = () => {
                       type="number"
                       name="quantity"
                       min="1"
-                      placeholder="1 for pets"
+                      defaultValue={category==="Pets"?1:""}
+                      readOnly={category==="Pets"}
                       className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
                     />
                   </div>
@@ -144,7 +145,7 @@ const ProductDetails = () => {
                       type="number"
                       name="price"
                       readOnly
-                      placeholder="Auto filled"
+                      defaultValue={price}
                       className="w-full px-4 py-2 border rounded-xl bg-gray-100 cursor-not-allowed"
                     />
                   </div>

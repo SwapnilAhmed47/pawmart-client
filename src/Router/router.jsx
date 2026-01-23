@@ -8,6 +8,9 @@ import Register from "../Auth/Register";
 import PetSupply from "../Pages/PetSupply/PetSupply";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import AddListing from "../Pages/AddListing/AddListing";
+import PrivateRoute from "./PrivateRoute";
+import PdfDownload from "../components/PdfDownload";
+import MyListing from "../Pages/MyListing/MyListing";
 
 export const router = createBrowserRouter([
     {
@@ -35,13 +38,18 @@ export const router = createBrowserRouter([
             },
             {
                 path : '/products/:id',
-                element : <ProductDetails></ProductDetails>,
+                element : <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
                 loader : ({params})=>fetch(`http://localhost:3000/products/${params.id}`)
                 
             },
             {
                 path : '/add-listing',
-                element : <AddListing></AddListing>
+                element : <PrivateRoute><AddListing></AddListing></PrivateRoute>
+            },
+
+            {
+                path : '/my-listing',
+                element : <MyListing></MyListing>
             },
 
             {
@@ -51,7 +59,8 @@ export const router = createBrowserRouter([
             {
                 path : '/register',
                 element : <Register></Register>
-            }
+            },
+            
             
             
         ]
@@ -59,5 +68,9 @@ export const router = createBrowserRouter([
     {
         path : '*',
         element : <p>Error</p>
-    }
+    },
+    {
+                path : '/pdfDownload',
+                element : <PdfDownload></PdfDownload>
+            }
 ])

@@ -30,7 +30,7 @@ const ProductCard = ({ product }) => {
   }
 
   return (
-    <div>
+    <div className="p-2 md:p-0">
       <div className="card bg-white shadow-md hover:shadow-xl transition rounded-2xl overflow-hidden">
         {/* Image */}
         <figure className="relative">

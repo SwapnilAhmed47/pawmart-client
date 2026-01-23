@@ -6,15 +6,15 @@ const Categories = () => {
   const category = ["pets", "food", "accessories", "care"];
   const [products, setProducts] = useState();
   console.log(products);
-  
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-      {category.map((cat, i) => (
-        <Link
-          key={i}
-          to={`/categories/${cat}`}
-          className="
+    <div className="p-2 md:p-0">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+        {category.map((cat, i) => (
+          <Link
+            key={i}
+            to={`/categories/${cat}`}
+            className="
       text-center
     px-10 py-5
     text-xl font-bold text-white
@@ -27,18 +27,19 @@ const Categories = () => {
     active:scale-95
     focus:outline-none focus:ring-4 focus:ring-pink-300
   "
-        >
-          {cat === "pets"
-            ? "Pets"
-            : cat === "food"
-              ? "Food"
-              : cat === "accessories"
-                ? "Accessories"
-                : cat === "care"
-                  ? "Care"
-                  : ""}
-        </Link>
-      ))}
+          >
+            {cat === "pets"
+              ? "Pets"
+              : cat === "food"
+                ? "Food"
+                : cat === "accessories"
+                  ? "Accessories"
+                  : cat === "care"
+                    ? "Pet care"
+                    : ""}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

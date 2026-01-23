@@ -6,6 +6,7 @@ import Banner from "../../components/Banner";
 import { FaListAlt } from "react-icons/fa";
 import { FaPaw } from "react-icons/fa";
 import WhyAdopt from "../../components/WhyAdopt";
+import PetHeroes from "../../components/PetHeros";
 
 const Home = () => {
   const data = useLoaderData();
@@ -45,6 +46,9 @@ const Home = () => {
         </div>
         <div className="mt-10">
           <WhyAdopt></WhyAdopt>
+        </div>
+        <div>
+          <PetHeroes></PetHeroes>
         </div>
 
       </div>

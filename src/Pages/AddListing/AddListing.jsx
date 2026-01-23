@@ -1,6 +1,52 @@
-import React from "react";
+import React, { use } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import Swal from "sweetalert2";
 
 const AddListing = () => {
+  const { user, loading } = use(AuthContext);
+  console.log(user);
+  const handleAddListing = (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const category = e.target.category.value;
+    const price = Number(e.target.price.value);
+    const location = e.target.location.value;
+    const description = e.target.description.value;
+    const image = e.target.image.value;
+    const date = e.target.date.value;
+    const email = e.target.email.value;
+
+    const productData = {
+      name,
+      category,
+      price,
+      location,
+      description,
+      image,
+      date,
+      email,
+    };
+
+    fetch("http://localhost:3000/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            icon: "success",
+            title: "Product Added",
+            text: "Your product/pet has been successfully added!",
+            confirmButtonColor: "#ec4899",
+          });
+        }
+      });
+  };
   return (
     <div>
       <div class="max-w-3xl mx-auto p-6 bg-white rounded-2xl shadow-lg">
@@ -8,13 +54,14 @@ const AddListing = () => {
           Add New Listing
         </h2>
 
-        <form class="flex flex-col gap-4">
+        <form onSubmit={handleAddListing} class="flex flex-col gap-4">
           {/* <!-- Product/Pet Name --> */}
           <div>
             <label class="block text-sm font-medium text-gray-600 mb-1">
               Product / Pet Name
             </label>
             <input
+              name="name"
               type="text"
               placeholder="Enter name"
               required
@@ -28,14 +75,15 @@ const AddListing = () => {
               Category
             </label>
             <select
+              name="category"
               required
               class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
             >
               <option value="">Select Category</option>
-              <option value="pets">Pet</option>
-              <option value="food">Food</option>
-              <option value="accessories">Accessories</option>
-              <option value="care">Care Products</option>
+              <option value="Pets">Pets</option>
+              <option value="Food">Food</option>
+              <option value="Accessories">Accessories</option>
+              <option value="Care">Care Products</option>
             </select>
           </div>
 
@@ -45,6 +93,7 @@ const AddListing = () => {
               Price ($)
             </label>
             <input
+              name="price"
               type="number"
               placeholder="Enter price or 0 for pet"
               min="0"
@@ -58,6 +107,7 @@ const AddListing = () => {
               Location
             </label>
             <input
+              name="location"
               type="text"
               placeholder="Enter location"
               required
@@ -71,6 +121,7 @@ const AddListing = () => {
               Description
             </label>
             <textarea
+              name="description"
               placeholder="Enter description"
               rows="4"
               required
@@ -84,6 +135,7 @@ const AddListing = () => {
               Image URL
             </label>
             <input
+              name="image"
               type="url"
               placeholder="https://example.com/photo.jpg"
               required
@@ -97,6 +149,7 @@ const AddListing = () => {
               Pick Up Date
             </label>
             <input
+              name="date"
               type="date"
               required
               class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
@@ -109,9 +162,10 @@ const AddListing = () => {
               Your Email
             </label>
             <input
+              name="email"
               type="email"
-              value="user@example.com"
-              readonly
+              readOnly
+              defaultValue={user?.email}
               class="w-full px-4 py-2 border rounded-xl bg-gray-100 focus:outline-none"
             />
           </div>

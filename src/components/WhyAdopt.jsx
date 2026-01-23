@@ -4,7 +4,7 @@ const WhyAdopt = () => {
   return (
     <section className="bg-gradient-to-r from-orange-50 via-pink-50 to-purple-50 py-16 px-4">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="flex items-center justify-center gap-3 text-3xl font-extrabold bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent mb-6">
+        <h2 className="flex flex-col md:flex-row items-center justify-center gap-3 text-3xl font-extrabold bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent mb-6">
           <FaHeart className="text-pink-500" />
           Why Adopt from PawMart?
         </h2>

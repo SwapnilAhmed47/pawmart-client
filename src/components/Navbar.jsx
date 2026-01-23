@@ -39,7 +39,7 @@ const Navbar = () => {
       {user && (
         <>
           <li>
-            <NavLink>Add Listing</NavLink>
+            <NavLink to={'/add-listing'}>Add Listing</NavLink>
           </li>
           <li>
             <NavLink>My Listings</NavLink>

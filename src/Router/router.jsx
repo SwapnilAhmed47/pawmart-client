@@ -11,6 +11,7 @@ import AddListing from "../Pages/AddListing/AddListing";
 import PrivateRoute from "./PrivateRoute";
 import PdfDownload from "../components/PdfDownload";
 import MyListing from "../Pages/MyListing/MyListing";
+import UpdateProduct from "../Pages/UpdateProduct/UpdateProduct";
 
 export const router = createBrowserRouter([
     {
@@ -49,7 +50,15 @@ export const router = createBrowserRouter([
 
             {
                 path : '/my-listing',
-                element : <MyListing></MyListing>
+                element : <PrivateRoute><MyListing></MyListing></PrivateRoute>
+            },
+
+            {
+                path : '/update/:id',
+                element : <UpdateProduct></UpdateProduct>,
+                loader : ({params})=>fetch(`http://localhost:3000/products/${params.id}`)
+                
+
             },
 
             {

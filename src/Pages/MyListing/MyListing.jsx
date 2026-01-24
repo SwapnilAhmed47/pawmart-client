@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router";
 
 const MyListing = () => {
   const [products, setProducts] = useState([]);
@@ -21,8 +22,8 @@ const MyListing = () => {
   console.log(products);
 
   const handleUpdate = (id) => {
-    const updateOne = products.filter(product => product._id == id)
-    console.log(updateOne[0])
+    const updateOne = products.filter((product) => product._id == id);
+    console.log(updateOne[0]);
   };
 
   if (loading) {
@@ -36,6 +37,7 @@ const MyListing = () => {
         <thead>
           <tr>
             <th>Name</th>
+            <th>Location</th>
             <th>Pick-Up Date</th>
             <th>Category</th>
             <th>Price</th>
@@ -51,31 +53,35 @@ const MyListing = () => {
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
                         <img
+                          className=""
                           src={product.image}
                           alt="Avatar Tailwind CSS Component"
                         />
                       </div>
                     </div>
                     <div>
-                      <div className="font-bold">{product.name}</div>
+                      <div className="">{product.name}</div>
                     </div>
                   </div>
                 </td>
+                <td>{product.location}</td>
                 <td>
                   {product.date}
                   <br />
-                  <span>Location : {product.location}</span>
+                  
                 </td>
                 <td>{product.category}</td>
                 <td>{product.price}$</td>
-                <th>
-                  <button
-                    onClick={() => handleUpdate(product._id)}
-                    className="btn btn-ghost btn-xs"
-                  >
-                    Update
-                  </button>
-                  <button className="btn btn-ghost btn-xs">details</button>
+                <th >
+                  <div className="flex gap-2">
+                    <Link
+                      to={`/update/${product._id}`}
+                      className="btn btn-primary btn-xs md:btn-sm"
+                    >
+                      Update
+                    </Link>
+                    <Link className="btn btn-warning btn-xs md:btn-sm">Delete</Link>
+                  </div>
                 </th>
               </tr>
             ))}

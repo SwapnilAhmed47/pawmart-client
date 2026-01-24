@@ -20,11 +20,11 @@ const Navbar = () => {
       .catch((err) => {
         console.log(err);
         Swal.fire({
-        icon: "error",
-        title: "Logout Failed",
-        text: err,
-        confirmButtonColor: "#ec4899",
-      });
+          icon: "error",
+          title: "Logout Failed",
+          text: err,
+          confirmButtonColor: "#ec4899",
+        });
       });
   };
 
@@ -39,10 +39,10 @@ const Navbar = () => {
       {user && (
         <>
           <li>
-            <NavLink to={'/add-listing'}>Add Listing</NavLink>
+            <NavLink to={"/add-listing"}>Add Listing</NavLink>
           </li>
           <li>
-            <NavLink to={'/my-listing'}>My Listings</NavLink>
+            <NavLink to={"/my-listing"}>My Listings</NavLink>
           </li>
           <li>
             <NavLink>My Orders</NavLink>
@@ -52,11 +52,12 @@ const Navbar = () => {
     </>
   );
 
-  if(loading){
-
-    return <div className="flex justify-center item-center">
-      <div className="skeleton h-18 w-full"></div>
-    </div>
+  if (loading) {
+    return (
+      <div className="flex justify-center item-center">
+        <div className="skeleton h-18 w-full"></div>
+      </div>
+    );
   }
 
   //
@@ -98,28 +99,44 @@ const Navbar = () => {
       <div className="navbar-end ">
         {user ? (
           <div className="flex gap-2">
-            <span className="">
-              <img
-                className="rounded-full h-12"
-                src={
-                  user.photoURL ||
-                  "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                }
-                alt=""
-              />
-            </span>
-            <button onClick={handleSignOut} className="btn btn-lg
+            
+              <div className="dropdown dropdown-hover dropdown-left">
+                <div tabIndex={0} role="button" className=" m-1">
+                  <img
+                    className="rounded-full h-10"
+                    src={
+                      user.photoURL ||
+                      "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    }
+                    alt=""
+                  />
+                </div>
+                <ul
+                  tabIndex="-1"
+                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                >
+                  <li>
+                    <a>{user.displayName}</a>
+                  </li>
+                </ul>
+              </div>
+           
+            <Link 
+              onClick={handleSignOut}
+              className="btn btn-lg
     text-white font-semibold
     rounded-xl
     bg-gradient-to-r from-red-400 via-pink-500 to-purple-500
     hover:from-red-500 hover:via-pink-600 hover:to-purple-600
-    transition-all duration-300">
+    transition-all duration-300"
+            >
               Logout
-            </button>
+            </Link>
           </div>
         ) : (
           <div className="flex gap-2">
-            <a
+            <Link
+              to={'/login'}
               className="rounded-xl
      btn btn-lg text-white border-0
     bg-gradient-to-r from-pink-400 via-fuchsia-500 to-purple-500
@@ -128,9 +145,10 @@ const Navbar = () => {
   "
             >
               Login
-            </a>
+            </Link>
 
-            <a
+            <Link
+              to={'/register'}
               className="rounded-xl
     btn btn-lg text-white border-0
     bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-500
@@ -139,7 +157,7 @@ const Navbar = () => {
   "
             >
               Register
-            </a>
+            </Link>
           </div>
         )}
       </div>

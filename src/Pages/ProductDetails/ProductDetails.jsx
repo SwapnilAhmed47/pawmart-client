@@ -1,18 +1,76 @@
-import React, { use, useContext, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
+import Swal from "sweetalert2";
 
 const ProductDetails = () => {
   const { user } = useContext(AuthContext);
-  console.log(user.email)
+  console.log(user.email);
   const product = useLoaderData();
-  console.log(product)
-  const {_id, name, category, email,  description, price, location, image } =
+  console.log(product);
+  const { _id, name, category, email, description, price, location, image } =
     product;
 
   const modelRef = useRef(null);
+  const handleOrderSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    const orderData = {
+      productId: form.productId.value,
+      productName: form.productName.value,
+      buyerName: form.buyerName.value,
+      email: form.email.value,
+      quantity: parseInt(form.quantity.value),
+      price: parseFloat(form.price.value),
+      address: form.address.value,
+      phone: form.phone.value,
+      pickupDate: form.date.value,
+      notes: form.notes.value,
+    };
+
+    console.log(orderData);
+
+    // POST request
+    fetch("http://localhost:3000/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          modelRef.current.close();
+          Swal.fire({
+            icon: "success",
+            title: "Order placed successfully ✅",
+            text: "Your order have been placed successfully",
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          title:"Order Failed ❌",
+          text: "Something went wrong, please try again!",
+        });
+      });
+  };
 
   const handleModalOpen = () => {
+    if (user?.email === email) {
+      Swal.fire({
+        icon: "error",
+        title: "Order Failed ❌",
+        text: "You cannot order your own product!",
+      });
+      return;
+    }
     modelRef.current.showModal();
   };
 
@@ -53,8 +111,8 @@ const ProductDetails = () => {
           {/* Adopt / Order Button */}
           <button
             onClick={handleModalOpen}
-            className="cursor-pointer mt-4 px-6 py-3 bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 
-                       text-white font-semibold rounded-xl hover:opacity-90 transition"
+            className={`cursor-pointer mt-4 px-6 py-3 bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 
+                       text-white font-semibold rounded-xl hover:opacity-90 transition`}
           >
             {category.toLowerCase() === "pets" ? "Adopt Now" : "Order Now"}
           </button>
@@ -64,7 +122,10 @@ const ProductDetails = () => {
             <div className="modal-box">
               <h3 className="font-bold text-lg">Hello!</h3>
               <div className="modal-action">
-                <form className="dialog bg-white p-6 rounded-2xl shadow-md space-y-4 w-full">
+                <form
+                  onSubmit={handleOrderSubmit}
+                  className="dialog bg-white p-6 rounded-2xl shadow-md space-y-4 w-full"
+                >
                   {/* Buyer Name */}
                   <div>
                     <label className="block text-sm font-medium text-gray-600 mb-1">
@@ -130,8 +191,8 @@ const ProductDetails = () => {
                       type="number"
                       name="quantity"
                       min="1"
-                      defaultValue={category==="Pets"?1:""}
-                      readOnly={category==="Pets"}
+                      defaultValue={category === "Pets" ? 1 : ""}
+                      readOnly={category === "Pets"}
                       className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
                     />
                   </div>
